@@ -13,12 +13,18 @@
   <p>chart below: </p>
   <div id="chart"></div>
   <script>
-    //fetch('http://jason-michaels.github.io/extract_this/output.json')
-      //              .then(data => console.log('!!!'))
-        //            .then(data => console.log('done?'))
-    let data_extract = fetch('http://jason-michaels.github.io/extract_this/output.json')
-                      .then(response => response.json())
-                      .then(result => return result)
+    let data_extract = getJson()
+    async function getJson() {
+      let response = await fetch('http://jason-michaels.github.io/extract_this/output.json')
+      if (response.ok) { 
+        let data_json = await response.json();
+      } else {
+        alert("HTTP-Error: " + response.status);
+      }
+      //let data_json = await response.json()
+      return data_json
+    }
+    
     console.log(data_extract)
     const options = {
           series: [{
